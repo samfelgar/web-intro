@@ -1,0 +1,189 @@
+---
+const navItems = [
+    {
+        to: "/",
+        label: "home",
+    },
+    {
+        to: "/blog",
+        label: "blog",
+    },
+    {
+        to: "/repos",
+        label: "repos",
+    },
+    {
+        to: "https://dev.to/samfelgar",
+        label: "dev.to",
+        target: "_blank",
+    },
+    {
+        to: "https://linkedin.com/in/samfelgar",
+        label: "linkedin",
+        target: "_blank",
+    },
+];
+---
+
+<header>
+    <h1>
+        <a href="/">
+            <div>
+                <small>samfelgar</small>
+            </div>
+        </a>
+    </h1>
+    <nav>
+        <ul>
+            {
+                navItems.map((item) => (
+                    <li>
+                        <a href={item.to} target={item.target || "_self"}>
+                            {item.label}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+    <button type="button" class="menu-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+    </button>
+</header>
+
+<nav class="collapsible">
+    <ul>
+        {
+            navItems.map((item) => (
+                <li>
+                    <a href={item.to} target={item.target || "_self"}>
+                        {item.label}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</nav>
+
+<style>
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: "Fira Code", monospace;
+        padding-inline: 4rem;
+        margin-block: 2rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+        font-weight: bold;
+    }
+
+    ul {
+        display: flex;
+        list-style: none;
+    }
+
+    li {
+        margin-inline: 1rem;
+        font-size: 1.25rem;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    nav a:hover, .collapsible a:hover {
+        border-bottom: 0.3rem solid;
+    }
+
+    .menu-btn {
+        display: none;
+    }
+
+    .collapsible {
+        display: none;
+    }
+
+    @media (max-width: 700px) {
+        header {
+            padding-inline: 2rem;
+        }
+
+        header nav {
+            display: none;
+        }
+
+        .collapsible {
+            display: block;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height .2s ease-in-out;
+        }
+
+        .collapsible.expanded {
+            margin-bottom: 3rem;
+        }
+
+        .collapsible ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            gap: 1rem;
+        }
+
+        .collapsible li {
+            margin-block: .8rem;
+        }
+
+        .menu-btn {
+            display: inline-block;
+            background: none;
+            border: none;
+        }
+
+        .menu-btn div {
+            width: 2.5rem;
+            height: 0.3rem;
+            background-color: var(--primary);
+            margin-block: 0.3rem;
+            transition: 0.4s;
+        }
+
+        .menu-btn.active div:nth-child(1) {
+            transform: translate(0, 10px) rotate(-45deg);
+        }
+
+        .menu-btn.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-btn.active div:nth-child(3) {
+            transform: translate(0, -10px) rotate(45deg);
+        }
+    }
+</style>
+
+<script lang="ts">
+    const button = document.querySelector(".menu-btn");
+    const nav = document.querySelector(".collapsible");
+    const ul = document.querySelector('.collapsible ul');
+
+    button.addEventListener(
+        "click",
+        (event) => {
+            button.classList.toggle("active");
+            nav.classList.toggle("expanded");
+
+            const isExpanded = nav.classList.contains('expanded');
+            nav.style.maxHeight = isExpanded ? ul.scrollHeight + 'px' : null;
+        },
+        true
+    );
+</script>

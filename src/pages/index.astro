@@ -1,0 +1,74 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/Container.astro";
+---
+
+<Layout title="samfelgar">
+	<Container>
+		<main>
+			<article>
+				<div>
+					<div class="me"></div>
+				</div>
+				<div>
+					<h2>the author</h2>
+					<p>
+						I'm a Brazilian software engineer who works with backend
+						stuff (PHP, mainly). But I do enjoy learning/doing
+						frontend as well, even tho it has changed a lot since I
+						first learned it.
+					</p>
+					<p>
+						Putting this site together was a fun challenge. It was
+						built using
+						<a href="https://astro.build" target="_blank">Astro</a>,
+						which is a cool frontend framework, focused in content.
+					</p>
+					<p>And, well, it's green.</p>
+				</div>
+			</article>
+		</main>
+	</Container>
+</Layout>
+
+<style>
+	.me {
+		background-image: url("../../public/images/me.jpg");
+		background-size: cover;
+		background-repeat: no-repeat;
+		height: 15rem;
+		width: 15rem;
+		border-radius: 50%;
+	}
+
+	h2 {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin-bottom: 1rem;
+	}
+
+	article {
+		display: flex;
+		gap: 4rem;
+		min-height: 70vh;
+		justify-content: center;
+		align-items: center;
+		line-height: 1.75rem;
+		font-size: 1.25rem;
+	}
+
+	@media (max-width: 60rem) {
+		article {
+			flex-direction: column;
+		}
+
+		article p, article h2 {
+			text-align: center;
+		}
+
+		.me {
+			height: 10rem;
+			width: 10rem;
+		}
+	}
+</style>
